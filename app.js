@@ -1,12 +1,15 @@
 const express = require("express");   
-    app       = express();
-    mongoose  = require("mongoose");
-    methodOverride = require("method-override");
+      expressSanitizer = require("express-sanitizer");
+      app       = express();
+      mongoose  = require("mongoose");
+      methodOverride = require("method-override");
+    
 
 // App Config
 app.set("view engine","ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({extended:true}));    
+app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 
 // MongoDb Connection
@@ -61,6 +64,7 @@ app.get("/blogs",(req,res)=>{
 
 // CREATE ROUTE
 app.post("/blogs",(req,res)=>{
+    req.body.blog.body = req.sanitize(req.body.blog.body);
     // console.log(req.body.blog);
     Blog.create({
         title:req.body.blog.title,
@@ -97,6 +101,7 @@ app.get("/blogs/:id",(req,res)=>{
 
 // EDIT ROUTE
 app.get("/blogs/:id/edit",(req,res)=>{
+    
     Blog.findById(req.params.id,(err,foundBlog)=>{
         if(err){
             console.log(err);
@@ -109,6 +114,7 @@ app.get("/blogs/:id/edit",(req,res)=>{
 
 // UPDATE ROUTE
 app.put("/blogs/:id",(req,res)=>{
+    req.body.blog.body = req.sanitize(req.body.blog.body);
     Blog.findByIdAndUpdate(req.params.id,req.body.blog,(err,updatedBlog)=>{
         if(err){
             console.log(err);
