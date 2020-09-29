@@ -1,0 +1,13 @@
+<%- include("partials/header") %>
+
+<form action="/blogs" method="post">
+    <label>Title:</label>
+    <input type="text" name="blog[title]">
+    <label>Image:</label>
+    <input type="text" name="blog[image]">
+    <label>Body:</label>
+    <input type="text" name="blog[body]">
+    <input type="submit">
+</form>
+
+<%- include("partials/footer") %>

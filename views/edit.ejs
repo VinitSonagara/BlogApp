@@ -1,0 +1,15 @@
+<%- include("partials/header") %>
+
+<h1>EDIT BLOG</h1>
+<form action="/blogs/<%= blog._id %>?_method=put" method="post">
+    <label>Title:</label>
+    <input type="text" name="blog[title]" value="<%= blog.title %>">
+    <label>Image:</label>
+    <input type="text" name="blog[image]" value="<%= blog.image %>">
+    <label>Body:</label>
+    <textarea type="text" name="blog[body]"><%= blog.body %></textarea>
+    <input type="submit">
+</form>
+
+
+<%- include("partials/footer") %>

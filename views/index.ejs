@@ -1,0 +1,19 @@
+<%- include("partials/header") %>
+
+<h1>Welcome To Blog</h1>
+
+
+    <% data.forEach((el)=>{ %>
+        <div>
+            <div><%= el.title %></div>
+            <img src="<%= el.image %>">
+            <p><%= el.body.substring(0,50) %>...</p>
+            <span>Created on: <%= el.created %></span>
+            <a href="/blogs/<%= el._id %>">Read More</a>
+        </div>
+        <br>
+        <br>    
+        <br>
+    <% }) %>
+
+<%- include("partials/footer") %>
