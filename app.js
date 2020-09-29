@@ -44,7 +44,7 @@ app.get("/",(req,res)=>{
     res.redirect("/blogs");
 });
 
-
+// CREATE ROUTE
 app.post("/blogs",(req,res)=>{
     // console.log(req.body.blog);
     Blog.create({
@@ -83,8 +83,8 @@ app.get("/blogs/new",(req,res)=>{
     res.render("form");
 });
 
+// SHOW ROUTE
 app.get("/blogs/:id",(req,res)=>{
-
     Blog.findById(req.params.id,(err,foundBlog)=>{
         if(err){
             console.log(err);
@@ -95,6 +95,7 @@ app.get("/blogs/:id",(req,res)=>{
     });
 });
 
+// EDIT ROUTE
 app.get("/blogs/:id/edit",(req,res)=>{
     Blog.findById(req.params.id,(err,foundBlog)=>{
         if(err){
@@ -106,7 +107,7 @@ app.get("/blogs/:id/edit",(req,res)=>{
     });
 });
 
-
+// UPDATE ROUTE
 app.put("/blogs/:id",(req,res)=>{
     Blog.findByIdAndUpdate(req.params.id,req.body.blog,(err,updatedBlog)=>{
         if(err){
@@ -118,6 +119,7 @@ app.put("/blogs/:id",(req,res)=>{
     });
 });
 
+// DELTE ROUTE
 app.get("/blogs/:id/delete",(req,res)=>{
     Blog.findByIdAndRemove(req.params.id,req.body,(err,deletedBlog)=>{
         if(err){
