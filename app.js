@@ -40,8 +40,23 @@ const Blog = mongoose.model("Blog",blogSchema);
 
 
 // RESTful Routes
+
+// HOME PAGE
 app.get("/",(req,res)=>{
     res.redirect("/blogs");
+});
+
+// INDEX ROUTE
+app.get("/blogs",(req,res)=>{
+
+    Blog.find({},(err,data)=>{
+        if(err){
+            console.log(err);
+        }        
+        else{
+            res.render("index",{data:data});
+        }
+    });
 });
 
 // CREATE ROUTE
@@ -62,21 +77,6 @@ app.post("/blogs",(req,res)=>{
     });
    
 });
-
-// INDEX ROUTE
-app.get("/blogs",(req,res)=>{
-
-    Blog.find({},(err,data)=>{
-        if(err){
-            console.log(err);
-        }        
-        else{
-            res.render("index",{data:data});
-        }
-    });
-});
-
-
 
 // NEW ROUTE
 app.get("/blogs/new",(req,res)=>{
